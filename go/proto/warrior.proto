@@ -4,9 +4,6 @@ syntax = "proto3";
 // Explicitly declaring the generating package name.
 package warrior;
 
-// Import timestamp utilities from google.
-import "google/protobuf/timestamp.proto";
-
 message Warrior {
     string name = 1;
 
@@ -24,9 +21,6 @@ message Warrior {
 
     // Keyword repeated means dynamic array size.
     repeated Weapon weapons = 2;
-
-    // Using import utilities.
-    google.protobuf.Timestamp last_updated = 3;
 }
 
 message Army {
