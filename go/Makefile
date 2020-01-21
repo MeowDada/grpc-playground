@@ -24,7 +24,7 @@ build_warrior:
 
 build_echo:
 	@echo "generating echo protobuf GO codes..."
-	@protoc -I=$(ECHO_PROTO_SRCDIR) --go_out=$(ECHO_PROTO_DSTDIR) $(ECHO_PROTO_SRCDIR)/*.proto
+	@protoc -I=$(ECHO_PROTO_SRCDIR) --go_out=plugins=grpc:$(ECHO_PROTO_DSTDIR) $(ECHO_PROTO_SRCDIR)/*.proto
 	@echo "building program echo client and server..."
 	@go build -o $(ECHO_CLIENT_PROG) $(ECHO_CLIENT_SRCS)
 	@go build -o $(ECHO_SERVER_PROG) $(ECHO_SERVER_SRCS)
