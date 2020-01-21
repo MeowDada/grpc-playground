@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 	
-	pb "github.com/meowdada/grpc-playground/go/proto"
+	pb "github.com/meowdada/grpc-playground/go/proto/warrior"
 	"github.com/golang/protobuf/proto"
 )
 
