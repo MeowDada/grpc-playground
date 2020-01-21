@@ -2,6 +2,10 @@ syntax = "proto3";
 
 package echo;
 
+service Echo {
+    rpc Echo (EchoRequest) returns(EchoReply){}
+}
+
 message EchoRequest {
     string msg = 1;
 }
