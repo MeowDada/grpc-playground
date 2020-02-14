@@ -1,4 +1,4 @@
-module github.com/meowdada/grpc-playground/examples/streaming-file/client
+module github.com/meowdada/grpc-playground/examples/streaming-file/server
 
 go 1.13
 

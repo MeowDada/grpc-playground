@@ -13,18 +13,20 @@ func main() {
 		Name:   "File uploader",
 		Usage:  "Upload file through gRPC",
 		Action: client.Run,
-		Flag: []cli.Flag {
+		Flags: []cli.Flag {
 			&cli.StringFlag {
 				Name:  "address",
-				Value: "",
+				Aliases: []string{"a"},
+				Value: "127.0.0.1:8888",
 				Usage: "address to communicate via gRPC",
 			},
 			&cli.StringFlag {
-				Name:  "filename",
+				Name:  "filename, ",
+				Aliases: []string{"f"},
 				Value: "",
 				Usage: "path to the file to be uploaded",
 			},
-		}
+		},
 	}
 
 	err := app.Run(os.Args)
