@@ -39,7 +39,9 @@ func Run(c *cli.Context) error {
 
 func openFileAndSend(stream pb.Uploader_UploadClient, filename string) (*pb.UploadResponse, error) {
 	buf := make([]byte, 65536)
-	chunk := pb.Chunk{}
+	chunk := pb.Chunk{
+		Filename: filename,
+	}
 
 	f, err := os.Open(filename)
 	if err != nil {

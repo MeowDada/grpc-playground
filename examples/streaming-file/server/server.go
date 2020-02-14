@@ -1,19 +1,32 @@
 package server
 
 import (
+	"path/filepath"
 	"io"
 	"net"
+	"os"
+	"bytes"
 
 	"google.golang.org/grpc"
 	pb "github.com/meowdada/grpc-playground/examples/streaming-file/pb"
 	cli "github.com/urfave/cli/v2"
 )
 
-type Server struct {}
+type Server struct {
+	root string
+}
 
 func (s Server) Upload (stream pb.Uploader_UploadServer) error {
 
 	var processedBytes int64 = 0
+	var f *os.File
+	var reader *bytes.Reader
+
+	defer func() {
+		if f != nil {
+			f.Close()
+		}
+	}()
 
 	for {
 		chunk, err := stream.Recv()
@@ -29,12 +42,22 @@ func (s Server) Upload (stream pb.Uploader_UploadServer) error {
 				Success: false,
 			})
 		}
-		processedBytes += int64(len(chunk.Data))
+		if f == nil {
+			f, err = os.Create(filepath.Join(s.root, chunk.Filename))
+			if err != nil {
+				return err
+			}
+		}
+		n, err := f.Write(chunk.Data)
+		if err != nil {
+			return err
+		}
+		processedBytes += int64(n)
 	}
 }
 
-func newServer() Server {
-	return Server{}
+func newServer(root string) Server {
+	return Server{root}
 }
 
 func Run(c *cli.Context) error {
@@ -52,7 +75,7 @@ func Run(c *cli.Context) error {
 	}
 
 	grpcServer := grpc.NewServer()
-	pb.RegisterUploaderServer(grpcServer, newServer())
+	pb.RegisterUploaderServer(grpcServer, newServer(root))
 	grpcServer.Serve(lis)
 
 	return nil
