@@ -1,6 +1,7 @@
 package server
 
 import (
+	"log"
 	"path/filepath"
 	"io"
 	"net"
@@ -35,6 +36,7 @@ func (s Server) Upload (stream pb.Uploader_UploadServer) error {
 			})
 		}
 		if err != nil {
+			log.Println(err)
 			return stream.SendAndClose(&pb.UploadResponse {
 				Bytes:   processedBytes,
 				Success: false,
@@ -43,11 +45,13 @@ func (s Server) Upload (stream pb.Uploader_UploadServer) error {
 		if f == nil {
 			f, err = os.Create(filepath.Join(s.root, chunk.Filename))
 			if err != nil {
+				log.Println(err)
 				return err
 			}
 		}
 		n, err := f.Write(chunk.Data)
 		if err != nil {
+			log.Println(err)
 			return err
 		}
 		processedBytes += int64(n)
@@ -64,11 +68,13 @@ func Run(c *cli.Context) error {
 	root := c.String("root")
 
 	if err := createRootdir(root); err != nil {
+		log.Println(err)
 		return err
 	}
 
 	lis, err := net.Listen("tcp", address)
 	if err != nil {
+		log.Println(err)
 		return err
 	}
 
