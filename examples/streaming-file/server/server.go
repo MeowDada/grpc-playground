@@ -5,7 +5,6 @@ import (
 	"io"
 	"net"
 	"os"
-	"bytes"
 
 	"google.golang.org/grpc"
 	pb "github.com/meowdada/grpc-playground/examples/streaming-file/pb"
@@ -20,7 +19,6 @@ func (s Server) Upload (stream pb.Uploader_UploadServer) error {
 
 	var processedBytes int64 = 0
 	var f *os.File
-	var reader *bytes.Reader
 
 	defer func() {
 		if f != nil {

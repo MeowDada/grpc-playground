@@ -17,6 +17,8 @@ github.com/meowdada/grpc-playground v0.0.0-20200214025304-a0be85c60d11 h1:HkQCzp
 github.com/meowdada/grpc-playground/examples/streaming-file v0.0.0-20200214025304-a0be85c60d11 h1:nf3zNu4+YTV/bI9XhD9BeWQ8PfkLYAXvfXIWx2UOmxs=
 github.com/meowdada/grpc-playground/examples/streaming-file/pb v0.0.0-20200214025304-a0be85c60d11 h1:mwnzNk2itWBI2nLDU/jQZH9Qkqmv2qKrrYj+2d1vpNM=
 github.com/meowdada/grpc-playground/examples/streaming-file/pb v0.0.0-20200214025304-a0be85c60d11/go.mod h1:ry0WK3mNGcFVezvnz958HVpvxO6BGOxqyh7/LDYXlsk=
+github.com/meowdada/grpc-playground/examples/streaming-file/pb v0.0.0-20200214035230-512f858fd936 h1:gmz3TU4jSd67sqH107JF+AhcnLp9AAt/WaQbsn8hmKI=
+github.com/meowdada/grpc-playground/examples/streaming-file/pb v0.0.0-20200214035230-512f858fd936/go.mod h1:ry0WK3mNGcFVezvnz958HVpvxO6BGOxqyh7/LDYXlsk=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/prometheus/client_model v0.0.0-20190812154241-14fe0d1b01d4/go.mod h1:xMI15A0UPsDsEKsMN9yxemIoYk6Tm2C1GtYGdfGttqA=
 github.com/russross/blackfriday/v2 v2.0.1 h1:lPqVAte+HuHNfhJ/0LC98ESWRz8afy9tM/0RK8m9o+Q=

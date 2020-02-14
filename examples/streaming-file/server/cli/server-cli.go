@@ -19,6 +19,11 @@ func main() {
 				Value: "127.0.0.1:8888",
 				Usage: "address to communicate via gRPC",
 			},
+			&cli.StringFlag {
+				Name:  "root",
+				Value: "./",
+				Usage: "root directory for creating files",
+			},
 		},
 	}
 
