@@ -1,8 +1,9 @@
 package client
 
 import (
-	"os"
 	"context"
+	"io"
+	"os"
 	"log"
 
 	"google.golang.org/grpc"
@@ -15,14 +16,14 @@ func Run(c *cli.Context) error {
 	address := c.String("address")
 	filename := c.String("filename")
 
-	conn, err := grpc.Dial(address, grpc.WithInSecure())
+	conn, err := grpc.Dial(address, grpc.WithInsecure())
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer conn.Close()
 
 	client := pb.NewUploaderClient(conn)
-	stream, err := client.Upload(ctx.Background())
+	stream, err := client.Upload(context.Background())
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -47,7 +48,7 @@ func openFileAndSend(stream pb.Uploader_UploadClient, filename string) (*pb.Uplo
 	defer f.Close()
 
 	for {
-		n, err := io.Read(buf)
+		n, err := f.Read(buf)
 		if err != nil {
 			if err == io.EOF {
 				break
@@ -56,7 +57,7 @@ func openFileAndSend(stream pb.Uploader_UploadClient, filename string) (*pb.Uplo
 		}
 
 		rbuf := buf[:n]
-		chunk.Data: rubf,
+		chunk.Data = rbuf
 		if err := stream.Send(&chunk); err != nil {
 			return nil, err
 		}
